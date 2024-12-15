@@ -1,4 +1,5 @@
 const http = require('http');
+const { buffer } = require('stream/consumers');
 //create new server
 const server = http.createServer((req, res)=>{
 
@@ -11,32 +12,32 @@ const server = http.createServer((req, res)=>{
 
 
     } else if(req.url==='/process' && req.method==="POST"){
+
+        const body = [];
         
         req.on('data',(chunk)=>{
-            console.log(chunk.toString());
+            body.push(chunk);
         })
 
+         
+        req.on('end',()=>{
+            console.log("stream finished");
+            const parseBody = Buffer.concat(body).toString();
+            console.log(parseBody);
+        })
         res.write("thank you for submitted ");
         res.end();
 
        
     }
-
     else {
         res.write('Not found');
         res.end();
     }
-
 });
-
-
-
 server.listen(3000)
 console.log('listening on prot 3000');
-
-
-
-
+ 
 // const fs = require('fs');
 // const ourReadStream = fs.createReadStream(`${__dirname}/myfile.txt`,'utf8');
 // ourReadStream.on('data', (data)=>{
