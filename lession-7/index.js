@@ -1,58 +1,48 @@
 /*
 
 1.Title : Basic Node app example
-2.Description : simple node application that print random quotes per 
-second interval.
+2.Description : Simple Node application that prints random quotes at 
+one-second intervals.
 
 3.Author : md atik hasan 
 4.Date : 19/12/24
 
-
 */
 
-
-//Dependencies 
+// Dependencies 
 const mathLibrary = require('./lib/math');
 const quotesLibrary = require('./lib/quotes');
 
-
-//App object - module scaffolding
+// App object - module scaffolding
 const App = {};
 
-
 // Configuration 
-app.config = {
-    timeBetweenQuotes: 1000,
-}
+App.config = {
+    timeBetweenQuotes: 1000, // 1 second interval
+};
 
-
-//function that prints a random quote 
-app.printAQuote = function printAQuote(){
-    //get all the quotes
+// Function that prints a random quote 
+App.printAQuote = function () {
+    // Get all the quotes
     const allQuotes = quotesLibrary.allQuotes();
 
-    //get the length of the quotes
+    // Get the length of the quotes
     const numberOfQuotes = allQuotes.length;
 
-    //Pick a random number between 1 and the number of quotes
-    const randomNumber = mathLibrary.getRandomNumber(1,numberOfQuotes);
+    // Pick a random number between 1 and the number of quotes
+    const randomNumber = mathLibrary.getRandomNumber(1, numberOfQuotes);
 
-
-    //get the quote at that position in the array (minus one )
+    // Get the quote at that position in the array (adjust for zero-based index)
     const selectedQuote = allQuotes[randomNumber - 1];
 
-    //print the quote to the console
+    // Print the quote to the console
     console.log(selectedQuote);
 };
 
+// Function that loops indefinitely, calling the printAQuote function
+App.indefiniteLoop = function () {
+    setInterval(App.printAQuote, App.config.timeBetweenQuotes);
+};
 
-
-//function that loops indefinitely , calling the printAQuote function as it goes
-app.indefiniteLoop = function indefiniteLoop(){
-    //create the interval , using the config variable defined above 
-    setInterval(app.printAQuote, app.config.timeBetweenQuotes);
-
-}
-
-//Invoke the loop
-app.indefiniteLoop();
+// Start the loop
+App.indefiniteLoop();
