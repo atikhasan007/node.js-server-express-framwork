@@ -9,14 +9,14 @@ one-second intervals.
 
 */
 
-// Dependencies 
+// Dependencies
 const mathLibrary = require('./lib/math');
 const quotesLibrary = require('./lib/quotes');
 
 // App object - module scaffolding
 const App = {};
 
-// Configuration 
+// Configuration
 App.config = {
     timeBetweenQuotes: 1000, // 1 second interval
 };
@@ -46,3 +46,4 @@ App.indefiniteLoop = function () {
 
 // Start the loop
 App.indefiniteLoop();
+
