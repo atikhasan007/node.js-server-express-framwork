@@ -19,11 +19,16 @@ const http = require('http');
 const app = {}
 
 //configuration
-app.config = {};
+app.config = {
+    prot: 3000
+};
 
 //crete server 
 app.createServer = () =>{
     const server = http.createServer(handleRequest);
+    server.listen(app.config.prot, () =>{
+        console.log(`listening to port ${app.config.prot}`)
+    })
 }
 
 
