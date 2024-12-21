@@ -15,7 +15,7 @@
 const { copyFileSync } = require('fs');
 const http = require('http');
 const { buffer } = require('stream/consumers');
-const {handleRequest} =require('../helpers/handleReqRes')
+const {hangleReqRes} =require('../helpers/handleReqRes')
 //app object  - module scaffolding
 const app = {}
 
@@ -26,15 +26,18 @@ app.config = {
 
 //crete server 
 app.createServer = () =>{
-    const server = http.createServer(app.handleRequest);
+    const server = http.createServer(app.hangleReqRes);
+
+    
     server.listen(app.config.prot, () =>{
+        console.log(`environment variable is ${process.env.NODE_ENV}`);
         console.log(`listening to port ${app.config.prot}`)
     }) 
 }
 
 
 //handle request response
-app.handleRequest  =  handleRequest;
+app.hangleReqRes  =  hangleReqRes;
 
 
 //start the server 
