@@ -46,10 +46,10 @@ handler.handleRequest = (req, res) => {
 
             // Return the final response
             res.writeHead(statusCode, { 'Content-Type': 'application/json' });
-            res.end(payloadString);
+          
         });
 
-        console.log(realData);
+        res.end(payloadString);
     });
 };
 

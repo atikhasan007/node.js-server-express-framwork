@@ -1,51 +1,34 @@
 /*
-
-1.Title : Uptime Monitoring Application 
-2.Description : A restful api to monitor up or down time of user defined links 
-
-3.Author : md atik hasan 
-4.Date : 19/12/24
-
+1.Title       : Uptime Monitoring Application 
+2.Description : A RESTful API to monitor uptime or downtime of user-defined links
+3.Author      : md atik hasan 
+4.Date        : 19/12/24
 */
 
-
-
-
-// dependencies 
-const { copyFileSync } = require('fs');
+// Dependencies
 const http = require('http');
-const { buffer } = require('stream/consumers');
-const {hangleReqRes} =require('../helpers/handleReqRes')
-//app object  - module scaffolding
-const app = {}
+const { handleReqRes } = require('../helpers/handleReqRes'); // Ensure the path is correct
+const environment = require('../helpers/environment'); // Ensure the path is correct
 
-//configuration
-app.config = {
-    prot: 3000
+// App object - Module scaffolding
+const app = {};
+
+// Create server
+app.createServer = () => {
+    const server = http.createServer(app.handleReqRes);
+
+    // Start the server and add error handling
+    server.listen(environment.port, (err) => {
+        if (err) {
+            console.error(`Server failed to start: ${err.message}`);
+            process.exit(1); // Exit the process in case of failure
+        }
+        console.log(`Server running on port ${environment.port} in ${environment.envName} mode.`);
+    });
 };
 
-//crete server 
-app.createServer = () =>{
-    const server = http.createServer(app.hangleReqRes);
+// Handle request and response
+app.handleReqRes = handleReqRes;
 
-    
-    server.listen(app.config.prot, () =>{
-        console.log(`environment variable is ${process.env.NODE_ENV}`);
-        console.log(`listening to port ${app.config.prot}`)
-    }) 
-}
-
-
-//handle request response
-app.hangleReqRes  =  hangleReqRes;
-
-
-//start the server 
- app.createServer();
-
-
-
-
-
-
-
+// Start the server
+app.createServer();
