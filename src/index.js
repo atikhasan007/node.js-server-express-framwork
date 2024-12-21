@@ -25,7 +25,7 @@ app.config = {
 
 //crete server 
 app.createServer = () =>{
-    const server = http.createServer(handleRequest);
+    const server = http.createServer(app.handleRequest);
     server.listen(app.config.prot, () =>{
         console.log(`listening to port ${app.config.prot}`)
     })
@@ -35,6 +35,10 @@ app.createServer = () =>{
 //handle request response
 app.handleRequest = (req, res) => {
     //response handle
-    res.end('hello world');
+    res.end('hello world programmer');
 }
 
+
+
+//start the server 
+ app.createServer();
