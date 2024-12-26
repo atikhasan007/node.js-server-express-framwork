@@ -29,10 +29,14 @@ const app = {};
 // });
 
 
-data.update('test', 'newFile', {
-    name:'England',
-    language:'English'
-},(err)=>{
+// data.update('test', 'newFile', {
+//     name:'England',
+//     language:'English'
+// },(err)=>{
+//     console.log(err);
+// })
+
+data.delete('test', 'newFile',(err)=>{
     console.log(err);
 })
 
