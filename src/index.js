@@ -16,13 +16,17 @@ const app = {};
 //testing file system
 //@todo pore muche dibo
 
-data.create('test', 'newFile' , {
-    'name':'bangladesh',
-    'language':'bangla'
-}, (err)=>{
-    console.log(`error was`, err);
-})
+// data.create('test', 'newFile' , {
+//     'name':'bangladesh',
+//     'language':'bangla'
+// }, (err)=>{
+//     console.log(`error was`, err);
+// })
 
+
+data.read('test', 'newFile', (err,data)=>{
+    console.log(err, data);
+});
 
 // Create server
 app.createServer = () => {
